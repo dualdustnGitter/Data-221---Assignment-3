@@ -43,15 +43,18 @@ print("Maximum Value: " + str(maxOfViolentCrimesPerPop))
 
 
 
+
 # comparing the mean and median, it can be observed that the mean is larger then the median
-matplotlib.pyplot.hist(columnOfViolentCrimesInPop, bins = 25)
-matplotlib.pyplot.show()
 # along side with the histogram showing the distribution shows a slightly apparent right skew shape,
 # this is concluded by the "tail" shape thats going right and a "hill" found on the left
 
+matplotlib.pyplot.hist(columnOfViolentCrimesInPop, bins = 25) # to see plot
+matplotlib.pyplot.show()
 
 
-# with outliers found at the value of 1.0, this causes the mean to deviate quite a bit
+
+# an unusually large portion of the values of 1 were found although not exactly an outlier it is still unusual
+# this causes the mean to deviate quite a bit
 # as seen from comparing it with the median, the mean is larger
 # this is explained by the way they are calculated, 
 # average/mean is calculated by the sum of all values and dividing it by the number of elements
