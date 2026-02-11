@@ -13,3 +13,13 @@
 #   purpose of testing set
 ### 
 
+from pandas import read_csv
+from sklearn.model_selection import train_test_split
+
+
+csvFileInput = read_csv("kidney_disease.csv")
+featureMatrixX = csvFileInput.drop(columns=["classification"])  # turn csv data into feature matrix
+                                                                # But get rid of "classification" column
+                                                                # using panda's drop function
+
+# print(featureMatrixX)

@@ -17,8 +17,7 @@
 ### 
 
 
-import pandas
-import numpy
+from pandas import read_csv
 import matplotlib.pyplot
 
 # make plot labels
@@ -36,7 +35,7 @@ matplotlib.pyplot.ylabel(yAxisLabelName)
 
 
 # get the file and column
-csvFileinput = pandas.read_csv("crime1.csv")
+csvFileinput = read_csv("crime1.csv")
 columnOfViolentCrimesInPop = csvFileinput["ViolentCrimesPerPop"]
 
 

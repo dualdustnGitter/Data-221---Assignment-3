@@ -15,21 +15,21 @@
 # 
 ### 
 
-import pandas
-import numpy
+from pandas import read_csv
+from numpy import mean, median, std, min, max
 import matplotlib.pyplot
 
 # get the file and column
-csvFileinput = pandas.read_csv("crime1.csv")
+csvFileinput = read_csv("crime1.csv")
 columnOfViolentCrimesInPop = csvFileinput["ViolentCrimesPerPop"]
 
 
 # calculate the values needed
-meanOfViolentCrimesPerPop = numpy.mean(columnOfViolentCrimesInPop)
-medianOfViolentCrimesPerPop = numpy.median(columnOfViolentCrimesInPop)
-stdvOfViolentCrimesPerPop = numpy.std(columnOfViolentCrimesInPop)
-minOfViolentCrimesPerPop = numpy.min(columnOfViolentCrimesInPop)
-maxOfViolentCrimesPerPop = numpy.max(columnOfViolentCrimesInPop)
+meanOfViolentCrimesPerPop = mean(columnOfViolentCrimesInPop)
+medianOfViolentCrimesPerPop = median(columnOfViolentCrimesInPop)
+stdvOfViolentCrimesPerPop = std(columnOfViolentCrimesInPop)
+minOfViolentCrimesPerPop = min(columnOfViolentCrimesInPop)
+maxOfViolentCrimesPerPop = max(columnOfViolentCrimesInPop)
 
 
 # show output
@@ -48,8 +48,10 @@ print("Maximum Value: " + str(maxOfViolentCrimesPerPop))
 # along side with the histogram showing the distribution shows a slightly apparent right skew shape,
 # this is concluded by the "tail" shape thats going right and a "hill" found on the left
 
-matplotlib.pyplot.hist(columnOfViolentCrimesInPop, bins = 25) # to see plot
-matplotlib.pyplot.show()
+showPlot = False # show/hide plot
+if showPlot:
+    matplotlib.pyplot.hist(columnOfViolentCrimesInPop, bins = 25) # to see plot
+    matplotlib.pyplot.show()
 
 
 
