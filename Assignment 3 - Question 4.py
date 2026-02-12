@@ -33,8 +33,9 @@ featureMatrixX = csvFileInput.drop(columns=["classification"])  # turn csv data 
                                                                 # using panda's drop function
 
 # cleaning up the feature Matrix so its usable
-featureMatrixX = get_dummies(featureMatrixX,drop_first=True)
-featureMatrixX = SimpleImputer(strategy="most_frequent").fit_transform(featureMatrixX)
+
+featureMatrixX = get_dummies(featureMatrixX,drop_first=True)    # changes the categorical variables into binary so the sklearn.metric methods can actually work with the function
+featureMatrixX = SimpleImputer(strategy="mean").fit_transform(featureMatrixX)  # to replace missing values with mean (of full column)
 
 # create training and testing data for "X" and "Y"
 featuresTrain, featuresTest, classificationTrain, classificationTest = train_test_split(featureMatrixX,labelVectorY, test_size=0.3, train_size=0.7, random_state=50)
@@ -45,13 +46,39 @@ numberOfNeighbors = 5
 knnModelForKidneyDiseaseCSV = KNeighborsClassifier(n_neighbors=numberOfNeighbors)
 knnModelForKidneyDiseaseCSV.fit(featuresTrain,classificationTrain)
 
+# use the model to predict the test  features
 predictedClassification = knnModelForKidneyDiseaseCSV.predict(featuresTest)
+# calculate the, accuracy, precision, recall score, and f1 score
 accuracy = accuracy_score(classificationTest,predictedClassification)
-# precision = precision_score(classificationTest,predictedClassification)
-# recallScore = recall_score(classificationTest,predictedClassification)
-# f1Score = f1_score(classificationTest,predictedClassification)
+precision = precision_score(classificationTest,predictedClassification, average= "macro", zero_division=1.0)
+recallScore = recall_score(classificationTest,predictedClassification, average = "macro")
+f1Score = f1_score(classificationTest,predictedClassification, average = "macro")
 
-print(accuracy)
-# print(precision)
-# print(recallScore)
-# print(f1Score)
+# display the calculated values
+print("Accuracy of model:\t\t" + str(accuracy))
+print("Precision of model:\t\t" + str(precision))
+print("Recall score of model:\t" + str(recallScore))
+print("F1 score of model:\t\t" + str(f1Score))
+
+
+
+# In the context of Kidney Disease..
+# True positive means to have a test to output positive/present on a person that does have the disease
+# True negative means to have a test to output negative/not present on a person that does not have the disease
+# False positive means to have a test output positive/present on a person when they do not have the disease
+# False negative means to have a test output negative/not present on a person when they do have the disease
+
+
+# as stated in the lectures, accuracy alone is enough to represent a model's effectness (bad models can have high accuracy)
+# this is due to the fact on how its calculated
+# its numerator is the sum of true positive and negative
+# and denominator being all 4 True P/N and False P/N
+# which it turn treats all errors equally even though they should be weighted depending on the number of them
+# espiecially if the data is heavily sided (imbalanced in data)
+
+
+# the most important metric here would be the "classification" metric  
+# what this entire model is predicting the classification depending on other variables such as age, blood pressure etc
+# by just having these independent and no classification there isnt really a point to train the data off of
+# just giving it "gibberish" values to conclude nothing
+# so the most important metric here would be the "classification" metric
