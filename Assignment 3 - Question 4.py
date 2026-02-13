@@ -33,7 +33,9 @@ featureMatrixX = csvFileInput.drop(columns=["classification"])  # turn csv data 
                                                                 # using panda's drop function
 
 # cleaning up the feature Matrix so its usable
-
+# sources:
+#   get_dummies - https://pandas.pydata.org/docs/reference/api/pandas.get_dummies.html
+#   SimpleImputer - https://scikit-learn.org/stable/modules/generated/sklearn.impute.SimpleImputer.html 
 featureMatrixX = get_dummies(featureMatrixX,drop_first=True)    # changes the categorical variables into binary so the sklearn.metric methods can actually work with the function
 featureMatrixX = SimpleImputer(strategy="mean").fit_transform(featureMatrixX)  # to replace missing values with mean (of full column)
 
@@ -49,16 +51,16 @@ knnModelForKidneyDiseaseCSV.fit(featuresTrain,classificationTrain)
 # use the model to predict the test  features
 predictedClassification = knnModelForKidneyDiseaseCSV.predict(featuresTest)
 # calculate the, accuracy, precision, recall score, and f1 score
-accuracy = accuracy_score(classificationTest,predictedClassification)
-precision = precision_score(classificationTest,predictedClassification, average= "macro", zero_division=1.0)
-recallScore = recall_score(classificationTest,predictedClassification, average = "macro")
-f1Score = f1_score(classificationTest,predictedClassification, average = "macro")
+accuracyOfKNNModel = accuracy_score(classificationTest,predictedClassification)
+precisionOfKNNModel = precision_score(classificationTest,predictedClassification, average= "macro", zero_division=1.0)
+recallScoreOfKNNModel = recall_score(classificationTest,predictedClassification, average = "macro")
+f1ScoreOfKNNModel = f1_score(classificationTest,predictedClassification, average = "macro")
 
 # display the calculated values
-print("Accuracy of model:\t\t" + str(accuracy))
-print("Precision of model:\t\t" + str(precision))
-print("Recall score of model:\t" + str(recallScore))
-print("F1 score of model:\t\t" + str(f1Score))
+print("Accuracy of model:\t\t" + str(accuracyOfKNNModel))
+print("Precision of model:\t\t" + str(precisionOfKNNModel))
+print("Recall score of model:\t" + str(recallScoreOfKNNModel))
+print("F1 score of model:\t\t" + str(f1ScoreOfKNNModel))
 
 
 
