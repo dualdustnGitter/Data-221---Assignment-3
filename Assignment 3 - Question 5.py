@@ -114,3 +114,17 @@ print(coolNewDataFrame)
 print("\nK value: [" + str(listOfNumberOfNeighbors[greatestTestAccuracyValueIndex]) + "] with highest accuracy: " + str(listOfAccuracyValuesOfKNNModel[greatestTestAccuracyValueIndex]))
 
 
+
+# the trend among the k value changing and responding by accuracy is that it has a quadratic relationship
+# as described soon a small k value causes overfitting while a charger one cause underfitting
+# and as seen in the lectures, there is a "sweet" spot with k value where its balanced in following
+# the training data and test data
+
+# A smaller k value causes it to overfit
+# since it looks at less neighbors to "predict" the overal trend
+# it sticks with the training data so much it cant really make "new" data
+
+# a bigger k value causes it to underfit
+# taking in account too much neighbors doesnt allow the model to accurately
+# predict new data as it sort of "falls" off
+
